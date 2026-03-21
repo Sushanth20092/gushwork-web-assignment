@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mangalam HDPE Pipes</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- =====================================================
+       STICKY HEADER
+       Hidden by default (translateY -100%).
+       JS adds .is-visible when user scrolls past main navbar.
+       JS removes .is-visible when user scrolls back to top.
+  ====================================================== -->
+  <div class="sticky-header" id="stickyHeader" aria-hidden="true">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Mangalam HDPE Pipes home">
+        <img src="assets/logo.png" alt="Mangalam HDPE Pipes" />
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#" class="nav-link">About Us</a>
+        <a href="#" class="nav-link nav-link--dropdown">
+          Products
+          <img src="assets/icons/downarrow.svg" alt="" aria-hidden="true" class="caret" />
+        </a>
+        <a href="#" class="btn-contact">Contact Us</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       MAIN NAVBAR
+       Always visible on page load.
+       Bottom edge is the scroll threshold for sticky header.
+  ====================================================== -->
+  <header class="navbar" id="mainNavbar">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Mangalam HDPE Pipes home">
+        <img src="assets/logo.png" alt="Mangalam HDPE Pipes" />
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#" class="nav-link">About Us</a>
+        <a href="#" class="nav-link nav-link--dropdown">
+          Products
+          <img src="assets/icons/downarrow.svg" alt="" aria-hidden="true" class="caret" />
+        </a>
+        <a href="#" class="btn-contact">Contact Us</a>
+      </nav>
+
+      <!-- Mobile only — hidden on desktop via CSS -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile nav drawer — slides down from navbar on mobile -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <a href="#" class="nav-link">About Us</a>
+    <a href="#" class="nav-link nav-link--dropdown">
+      Products
+      <img src="assets/icons/caret-down.svg" alt="" aria-hidden="true" class="caret" />
+    </a>
+    <a href="#" class="btn-contact btn-contact--full">Contact Us</a>
+  </div>
+
+
+  <!-- Scroll test body -->
+  <main class="page-body">
+    <p>Scroll down to test the sticky header →</p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

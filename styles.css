@@ -1,0 +1,402 @@
+/* =============================================================
+   styles.css — Mangalam HDPE Pipes
+   Header + Sticky Header only (hero comes next)
+
+   Figma breakpoints (navbar padding):
+     ≥ 1600px  →  padding: 16px 100px  (base — DONE)
+     < 1440px  →  padding: 100px all sides  (stub — TODO)
+     < 1200px  →  padding: 80px all sides   (stub — TODO)
+     < 1080px  →  top/bottom 80px, left/right 60px  (stub — TODO)
+     <  800px  →  top/bottom 80px, left/right 48px  (stub — TODO)
+     <  360px  →  top/bottom 48px, left/right 16px, logo only (stub — TODO)
+
+   Base Figma specs (1600px):
+     • Navbar outer:  height 77px, padding 16px 100px
+     • Inner frame:   max-width 1240px, centred
+     • Logo:          109 × 45px
+     • Nav gap:       20px between items
+     • Nav buttons:   padding 12px 16px, gap 4px, border-radius 10px, height 44px
+     • About Us:      94 × 44px  — no fill
+     • Products ▾:    107 × 44px — no fill
+     • Contact Us:    107 × 44px — fill #2B3990
+============================================================= */
+
+/* ── Google Font ── */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Tokens ── */
+:root {
+  --blue:        #2B3990;
+  --blue-hover:  #222e7a;
+  --text:        #1a1a1a;
+  --text-mid:    #555555;
+  --border:      #e5e7eb;
+  --white:       #ffffff;
+  --nav-h:       77px;          /* exact Figma height          */
+  --max-w:       1240px;        /* inner content frame         */
+  --pad-x:       100px;         /* horizontal padding at 1600px canvas */
+  --radius:      10px;          /* button border-radius        */
+  --font:        'Plus Jakarta Sans', sans-serif;
+  --ease:        cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Base ── */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+a  { text-decoration: none; color: inherit; }
+img { display: block; }
+
+/* =============================================================
+   SHARED INNER FRAME
+   Centers content at 1240px with 100px side padding.
+   The outer element (navbar / sticky-header) is full-width
+   and provides the background colour.
+============================================================= */
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 16px var(--pad-x);  /* Figma base: 16px top/bottom, 100px left/right */
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+/* =============================================================
+   LOGO
+   109 × 45px, object-fit: contain so any logo shape works.
+============================================================= */
+.logo {
+  flex-shrink: 0;
+  line-height: 0;               /* removes inline gap below img */
+}
+
+.logo img {
+  width:  109px;
+  height: 45px;
+  object-fit: contain;
+}
+
+/* =============================================================
+   NAV LINKS  (shared between main navbar + sticky header)
+   Figma: display flex, flex-direction row, align-items center,
+          gap 20px, width 226px, height 44px
+============================================================= */
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;                    /* Figma: gap 20px */
+  height: 44px;
+}
+
+/* ── About Us — plain nav link ── */
+.nav-link {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px;           /* Figma: padding 12px 16px */
+  height: 44px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  transition: background 0.18s var(--ease);
+}
+
+.nav-link:hover {
+  background: #f0f1f8;
+}
+
+/* ── Products ▾ — asymmetric padding + wider + bigger gap ── */
+/* Figma: padding 12px 12px 12px 16px, gap 8px, width 112px, height 44px */
+.nav-link--dropdown {
+  padding: 12px 12px 12px 16px; /* Figma: left 16px, right 12px */
+  gap: 8px;                     /* Figma: gap 8px (not 4px) */
+  width: 112px;                 /* Figma: exact 112px */
+}
+
+/* Caret — CaretRight icon rotated 90° to face downward */
+/* Figma: width 16px, height 16px, transform rotate(90deg) */
+.nav-link .caret {
+  width:  16px;
+  height: 16px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  order: 1;
+  transform: rotate(90deg);                       /* Figma base: faces down */
+  transition: transform 0.22s var(--ease);
+}
+
+/* On hover rotate another 90° so it faces up (180° total) */
+.nav-link--dropdown:hover .caret {
+  transform: rotate(270deg);
+}
+
+/* ── Contact Us button ── */
+.btn-contact {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px;
+  width:  107px;                /* Figma: exact 107px */
+  height: 44px;
+  background: var(--blue);
+  color: var(--white);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.18s var(--ease), transform 0.15s var(--ease);
+}
+
+.btn-contact:hover {
+  background: var(--blue-hover);
+  transform: translateY(-1px);
+}
+
+/* =============================================================
+   MAIN NAVBAR
+   Full-width, height 77px, white background, bottom border.
+   position: relative — stays in normal document flow.
+============================================================= */
+.navbar {
+  position: relative;
+  width: 100%;
+  height: var(--nav-h);
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
+}
+
+/* =============================================================
+   STICKY HEADER
+   Fixed to top of viewport.
+   Starts hidden above the screen (translateY -100%, opacity 0).
+   JS class .is-visible slides it in.
+   JS class .is-hidden forces it out (scroll-up guard).
+============================================================= */
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-h);
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  z-index: 100;
+
+  /* Hidden state */
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    transform 0.32s var(--ease),
+    opacity   0.32s var(--ease);
+}
+
+/* Slide in */
+.sticky-header.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* =============================================================
+   HAMBURGER  (mobile only — hidden on desktop)
+============================================================= */
+.hamburger {
+  display: none;                /* shown via media query below */
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 6px;
+  flex-shrink: 0;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.22s var(--ease), opacity 0.22s var(--ease);
+}
+
+/* Animate to X when open */
+.hamburger[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* =============================================================
+   MOBILE DRAWER
+   Slides down from below the navbar on mobile.
+   Hidden by default; JS toggles .is-open.
+============================================================= */
+.mobile-drawer {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  width: 100%;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  z-index: 99;
+
+  display: flex;
+  flex-direction: column;
+  padding: 12px 24px 20px;
+  gap: 4px;
+
+  /* Hidden state */
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.25s var(--ease),
+    opacity   0.25s var(--ease);
+}
+
+.mobile-drawer.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Override nav-link inside drawer: full-width, left-aligned */
+.mobile-drawer .nav-link {
+  justify-content: flex-start;
+  width: 100%;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  padding: 12px 4px;
+}
+
+.mobile-drawer .nav-link:last-of-type {
+  border-bottom: none;
+}
+
+/* Full-width contact button in drawer */
+.btn-contact--full {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* =============================================================
+   PAGE BODY  — temporary scroll test content
+============================================================= */
+.page-body {
+  min-height: 200vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: #aaa;
+  padding: 60px 24px;
+  text-align: center;
+}
+
+/* =============================================================
+   RESPONSIVE — 6 Figma breakpoints
+   Only --pad-x and layout changes go here.
+   All other tokens (--nav-h, --max-w, etc.) stay at base values
+   unless Figma specifies a change for that breakpoint.
+============================================================= */
+
+/* ─────────────────────────────────────────────────────────────
+   BREAKPOINT 1 — screen size below 1440px
+   Figma: padding 16px 100px, height 77px
+───────────────────────────────────────────────────────────── */
+@media (max-width: 1440px) {
+  .nav-inner {
+    padding: 16px 100px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BREAKPOINT 2 — screen size below 1200px
+   Figma: padding 16px 80px, height 77px
+───────────────────────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .nav-inner {
+    padding: 16px 80px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BREAKPOINT 3 — screen size below 1080px
+   Figma: padding 16px 60px, height 77px
+───────────────────────────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .nav-inner {
+    padding: 16px 60px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BREAKPOINT 4 — screen size below 800px
+   Figma: padding 16px 48px, height 77px
+───────────────────────────────────────────────────────────── */
+@media (max-width: 800px) {
+  .nav-inner {
+    padding: 16px 48px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BREAKPOINT 5 — screen size 360px (smallest Figma screen)
+   Figma: padding 16px (all sides), height 77px
+   Logo only — all nav items hidden
+   Using max-width: 480px since there is no Figma breakpoint
+   between 800px and 360px — this covers all small phones.
+───────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .nav-inner {
+    padding: 16px;
+  }
+
+  .navbar .nav-links        { display: none; }
+  .sticky-header .nav-links { display: none; }
+  .hamburger                { display: none; }
+}
